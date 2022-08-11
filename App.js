@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import * as React from 'react';
+import InputMask from "react-input-mask";
 import {
   AppRegistry,
   StyleSheet,
@@ -20,8 +21,12 @@ const [height, setHeight] = useState(null);
 const [Weight, setWeight] = useState(null);
 const [MessageImc, setMessageImc] = useState("Preencha os botoes");
 const [imc, setimc] = useState(null);
-const [textButton, setTextButton] = useState("Calcular!");
-var final = Weight/(height*height).toFixed(2);
+const [textButton, setTextButton] = useState("Calcular2!");
+console.log(height);
+console.log(Weight);
+var final = (Weight/((height*height) /10000)).toFixed(2);
+
+console.log("Resultado é:" + final);
 
   function newFunction() {
     return "Preencha o peso e a altura";
@@ -36,7 +41,7 @@ function validarIMC(){
     imcCalculator();
     setWeight(null);
     setHeight(null);
-    setMessageImc("Seu IMC é igual:  " +final.toFixed(2));
+    setMessageImc("Seu IMC é igual:  " +final);
     setTextButton("Digite novamente");
     return
   }
@@ -50,16 +55,19 @@ function validarIMC(){
 var mensagem = MessageImc;
   return (
     <View style={styles.container}>
-      <Text style={{alignItems:'center', fontSize:24, color:'#FF0043', fontWeight: 'bold'}}>Tiago Dolf</Text>
-      <Text style={{ fontWeight: 'bold', fontSize:16, color:'#FF0043', fontWeight: 'bold'}}> {'\n'}Altura</Text>
+      <Text style={{alignItems:'center', fontSize:24, color:'#0a0fbb', fontWeight: 'bold'}}>Calculadora de IMC</Text>
+      <Text style={{  fontWeight: 'bold', fontSize:16, color:'#0a0fbb', fontWeight: 'bold'}}> {'\n'}Altura</Text>
       <TextInput 
-            style={styles.textField} 
+            style= {styles}
             onChangeText={setHeight}
             placeholder="Ex: 1,90" 
             placeholderTextColor= 'black' 
             value={height}
+            borderColor= 'gray'
+          
+          
             keyboardType= 'numeric' />
-    <Text style={{ fontWeight: 'bold', fontSize:16, color:'#FF0043', fontWeight: 'bold' }}>Peso</Text>
+    <Text style={{ fontWeight: 'bold', fontSize:16, color:'#0a0fbb', fontWeight: 'bold' }}>Peso</Text>
     <TextInput 
             style={styles.textField} 
             onChangeText={setWeight}
@@ -70,13 +78,13 @@ var mensagem = MessageImc;
 <TouchableOpacity
         onPress={() => validarIMC ()}
       >
-        <Text  style={{color:'#FFF', fontSize:23, borderRadius:50, borderWidth: 1, backgroundColor:'#FF0043', padding:10}}> Calcular</Text>
+        <Text  style={{color:'#FFF', fontSize:15, borderRadius:40, borderWidth: 2, backgroundColor:'#0a0fbb', padding:15, margin:15}}> Calcular</Text>
       </TouchableOpacity>
 
       <StatusBar style="auto" />
-      <Text style={{ fontWeight: 'bold', color:"#FF0043"}} >{'\n'} {mensagem}</Text>
+      <Text style={{ fontWeight: 'bold', color:"#0a0fbb"}} >{'\n'} {mensagem}</Text>
 {/*       <resultimc Messegeinputimc={MessageImc} Resultimc2={imc} /> 
- */}      
+ */}
     </View>
 
   );
